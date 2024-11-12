@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Anzeige der gefundenen Easter Eggs -->
+    <div id="egg-counter">
+        <p><span id="found-eggs-count">{{ found_eggs }}</span> von <span id="total-eggs-count">{{ found_eggs }}</span>{{ total_eggs }} Easter Eggs gefunden</p>
+        <h3 id="countdown-display">Zeit: 2:00</h3> <!-- Countdown-Anzeige unterhalb der gefundenen Eggs -->
+    </div>
+
+    <div class="container">
+        <div id="infotxt">
+        <h1>Happy Birthday, <span id="name">{{ name }}</span>! 🎉</h1>
+            <h1>Herzlich Willkommen zu Saddurys Playground!</h1>
+        <p>Auf dieser Seite sind 21 versteckte Überraschungen (Easter Eggs).<br> Erfülle die Aufgaben, um sie zu entdecken! 🐰<br>
+        <br>Oben rechts siehst du deinen aktuellen Stand, finde alle Easter Eggs innerhalb von 2 Minuten - LOS!</p>
+        </div>
+
+        <!-- START und BEENDEN Buttons -->
+        <button onclick="startGame()" id="start-button">START</button>
+        <button onclick="endGame()" id="end-button" class="hidden">BEENDEN</button>
+
+        <!-- Aufgaben: Sichtbar nach START -->
+        <div id="tasks-container" class="hidden">
+            <!-- 1. Wochentag Frage -->
+            <div id="task-1" class="task">
+                <p>1. An welchem Wochentag bist du geboren?</p>
+                <div id="weekday-buttons">
+                    <button onclick="checkWeekday('montag')">Montag</button>
+                    <button onclick="checkWeekday('dienstag')">Dienstag</button>
+                    <button onclick="checkWeekday('mittwoch')">Mittwoch</button>
+                    <button onclick="checkWeekday('donnerstag')">Donnerstag</button>
+                    <button onclick="checkWeekday('freitag')">Freitag</button>
+                    <button onclick="checkWeekday('samstag')">Samstag</button>
+                    <button onclick="checkWeekday('sonntag')">Sonntag</button>
+                </div>
+            </div>
+
+            <!-- Mathematikaufgaben -->
+            <div id="math-tasks-container">
+                <div id="math-task-1" class="task">
+                    <p id="question-1"></p>
+                    <input type="text" id="math-answer-1">
+                    <button onclick="checkMathAnswer(1)">Überprüfen</button>
+                </div>
+
+                <div id="math-task-2" class="task">
+                    <p id="question-2"></p>
+                    <input type="text" id="math-answer-2">
+                    <button onclick="checkMathAnswer(2)">Überprüfen</button>
+                </div>
+
+                <div id="math-task-3" class="task">
+                    <p id="question-3"></p>
+                    <input type="text" id="math-answer-3">
+                    <button onclick="checkMathAnswer(3)">Überprüfen</button>
+                </div>
+
+                <div id="math-task-4" class="task">
+                    <p id="question-4"></p>
+                    <input type="text" id="math-answer-4">
+                    <button onclick="checkMathAnswer(4)">Überprüfen</button>
+                </div>
+
+                <div id="math-task-5" class="task">
+                    <p id="question-5"></p>
+                    <input type="text" id="math-answer-5">
+                    <button onclick="checkMathAnswer(5)">Überprüfen</button>
+                </div>
+            </div>
+
+            <!-- Bild-Datumsfrage -->
+            <div id="image-guess-container" class="task hidden">
+                <p>7. In welchem Jahr und Monat wurde dieses Bild aufgenommen?</p>
+                <img id="guess-image" src="/static/saddur-8.jpg" alt="Rätselbild" width="300px">
+                <div>
+                    <label for="guess-month">Monat:</label>
+                    <input type="text" id="guess-month" placeholder="z. B. Januar">
+                </div>
+                <button onclick="checkImageGuess()">Überprüfen</button>
+                <p id="image-guess-result"></p>
+            </div>
+
+            <!-- Bildreihenfolge -->
+            <div id="ordering-question-container" class="task hidden">
+                <p>8. Ordne die Bilder der Reihenfolge nach, von dem frühesten bis zum neuesten Bild:</p>
+                <div id="image-order-container">
+                    <div class="draggable-image" draggable="true" id="image1">
+                        <img src="/static/order1.jpg" alt="Bild 1">
+                    </div>
+                    <div class="draggable-image" draggable="true" id="image2">
+                        <img src="/static/order2.jpg" alt="Bild 2">
+                    </div>
+                    <div class="draggable-image" draggable="true" id="image3">
+                        <img src="/static/order3.jpg" alt="Bild 3">
+                    </div>
+                    <div class="draggable-image" draggable="true" id="image4">
+                        <img src="/static/order4.jpg" alt="Bild 4">
+                    </div>
+                    <div class="draggable-image" draggable="true" id="image5">
+                        <img src="/static/order5.jpg" alt="Bild 5">
+                    </div>
+                </div>
+                <button onclick="checkImageOrder()">Bestätigen</button>
+                <p id="ordering-result"></p>
+            </div>
+
+            <!-- Geschenkbox -->
+            <div id="gift-boxes-container" class="task hidden">
+                <p>9. Wähle eine Geschenkbox aus:</p>
+                <div class="gift-box" onclick="confirmGiftSelection(1)">
+                    <img src="/static/gift-1.jfif" alt="Geschenkbox 1" width="100px">
+                </div>
+                <div class="gift-box" onclick="confirmGiftSelection(2)">
+                    <img src="/static/gift-1.jfif" alt="Geschenkbox 2" width="100px">
+                </div>
+                <div class="gift-box" onclick="confirmGiftSelection(3)">
+                    <img src="/static/gift-1.jfif" alt="Geschenkbox 3" width="100px">
+                </div>
+            </div>
+
+            <!-- Reaktionstest -->
+            <div id="reaction-test" class="task hidden">
+                <p>10. Drücke den Knopf so schnell wie möglich, sobald er erscheint!</p>
+                <button id="reaction-button" onclick="handleReactionClick()" class="hidden">Klick mich!</button>
+                <p id="reaction-result"></p>
+            </div><br><br><br><br>
+        </div>
+
+        <!-- Container für aktivierte Easter Eggs -->
+        <div id="easterEggContainer"></div>
+
+        <!-- Finaler Button und Text -->
+        <div id="final-container" class="hidden">
+            <button id="final-button" onclick="showFinalMessage()">Drücke mich, vielleicht  ist ja etwas cooles hier, demi cano!</button>
+            <p id="final-message" class="hidden">Herzlichen Glückwunsch! Du hast das Spiel erfolgreich abgeschlossen! Du bist so toll Saddurlum 🎊</p>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

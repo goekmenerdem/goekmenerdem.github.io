@@ -1,0 +1,251 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 40px 0;
+    background: #ffdeeb;
+    color: #333;
+}
+
+.container {
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+}
+
+#egg-counter {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ff9a8d;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    text-align: center; /* Zentriert die Texte innerhalb des Containers */
+    z-index: 1000; /* Stellt sicher, dass es über anderen Inhalten angezeigt wird */
+}
+
+#countdown-display {
+    margin-top: 5px;
+    font-size: 1em; /* Schriftgröße des Countdowns etwas kleiner */
+    color: white; /* Countdown-Schriftfarbe */
+}
+
+
+h1 {
+    color: #d6336c;
+    font-size: 2em;
+}
+
+#reaction-test {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#reaction-button {
+    font-size: 1.5em;
+    padding: 15px 30px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#reaction-button:hover {
+    background-color: #218838;
+}
+
+#image-guess-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#image-guess-container img {
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+#image-guess-container input[type="text"] {
+    margin: 5px;
+    padding: 8px;
+    font-size: 1em;
+    border: 1px solid #d6336c;
+    border-radius: 5px;
+}
+
+#image-guess-container button {
+    font-size: 1em;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#image-guess-container button:hover {
+    background-color: #218838;
+}
+
+#image-guess-result {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#image-order-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.draggable-image {
+    width: 100px;
+    cursor: move;
+}
+
+.draggable-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    transition: border-color 0.3s;
+}
+
+.draggable-image.dragging {
+    opacity: 0.6;
+    border-color: #d6336c;
+}
+
+#gift-boxes-container {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.gift-box {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.gift-box:hover {
+    transform: scale(1.1);
+}
+
+
+
+button {
+    background-color: #d6336c;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #c2185b;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Finaler Button und Text in der Mitte zentrieren */
+#final-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#final-button {
+    font-size: 1.5em;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#final-message {
+    font-size: 1.5em;
+    color: #2e8b57;
+    margin-top: 20px;
+}
+
+/* Größere Eingabefelder für die Mathematikaufgaben */
+input[type="text"] {
+    width: 100px; /* Breite des Eingabefelds */
+    height: 40px; /* Höhe des Eingabefelds */
+    font-size: 1.2em; /* Schriftgröße */
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #d6336c;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #c2185b; /* Randfarbe beim Fokussieren */
+}
+
+.easter-egg {
+    position: absolute;
+    font-size: 2em;
+    z-index: 1000; /* Über anderen Elementen anzeigen */
+    transition: transform 0.3s ease; /* Optional: Hinzufügen eines leichten Effekts */
+}
+
+.easter-egg:hover {
+    transform: scale(1.2); /* Vergrößern beim Hovern */
+}
+
+.floating-image {
+    width: 140px;
+    position: absolute;
+    animation: float 3s ease-in-out infinite, spin 3s linear infinite;
+    cursor: pointer;
+    /* Zentriert die Bilder im mittleren Bereich */
+    left: 50%; /* Ausgangspunkt in der Mitte des Bildschirms */
+    top: 50%;
+    transform: translate(-50%, -50%); /* Zentriert das Bild genau */
+}
+
+/* Schwebeanimation, um die Bilder sanft auf und ab zu bewegen */
+@keyframes float {
+    0%, 100% {
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    50% {
+        transform: translate(-50%, -50%) translateY(-20px);
+    }
+}
+
+/* Dreh-Animation für die Bilder */
+@keyframes spin {
+    from {
+        transform: rotate(0deg) translate(-50%, -50%);
+    }
+    to {
+        transform: rotate(360deg) translate(-50%, -50%);
+    }
+}
+
+.draggable-image img {
+    width: 100px; /* Feste Größe für das Bild */
+    user-drag: none; /* Verhindert das Standard-Drag-Verhalten */
+    -webkit-user-drag: none; /* Verhindert das Draggen in Webkit-Browsern */
+}
+
+
+
+
